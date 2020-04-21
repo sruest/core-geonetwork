@@ -430,6 +430,7 @@
   <xsl:function name="gn-fn-metadata:getFieldAddDirective" as="node()">
     <xsl:param name="configuration" as="node()"/>
     <xsl:param name="name" as="xs:string"/>
+    <xsl:param name="xpath" as="xs:string"/>
 
     <xsl:variable name="type"
                   select="$configuration/editor/fields/for[@name = $name and @addDirective]"/>
@@ -447,6 +448,7 @@
                 as="attribute()*">
     <xsl:param name="configuration" as="node()"/>
     <xsl:param name="name" as="xs:string"/>
+    <xsl:param name="xpath" as="xs:string"/>
 
     <xsl:copy-of select="$configuration/editor/fields/
           for[@name = $name and @addDirective]/
@@ -455,9 +457,16 @@
 
   <!-- Return if a flat mode exception has been defined in the current view for a field. -->
   <xsl:function name="gn-fn-metadata:isFieldFlatModeException" as="xs:boolean">
+    <xsl:param name="configuration" as="node()"/>
+    <xsl:param name="name" as="xs:string"/>
+    <xsl:value-of select="gn-fn-metadata:isFieldFlatModeException($configuration, $name, '')"/>
+  </xsl:function>
+
+  <xsl:function name="gn-fn-metadata:isFieldFlatModeException" as="xs:boolean">
     <xsl:param name="configuration" as="node()?"/>
     <xsl:param name="name" as="xs:string"/>
     <xsl:param name="parent" as="xs:string?" />
+<!--    <xsl:param name="xpath" as="xs:string"/>-->
 
     <xsl:choose>
       <xsl:when test="not($configuration)">
@@ -468,6 +477,7 @@
                       select="if (string($parent))
                   then count($configuration/flatModeExceptions/for[@name = $name and (not(@excludeFrom) or (@excludeFrom and not(contains(@excludeFrom, $parent))))])
                   else count($configuration/flatModeExceptions/for[@name = $name])"/>
+<!--        select="count($configuration/flatModeExceptions/for[@name = $name and (not(@xpath) or @xpath = '' or @xpath = $xpath)])"/>-->
 
         <xsl:value-of select="if ($exception > 0)
                       then true()

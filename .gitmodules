@@ -15,4 +15,4 @@
 	url = https://github.com/metadata101/iso19115-3.2018
 [submodule "schemas/dcat-ap"]
 	path = schemas/dcat-ap
-	url = https://github.com/metadata101/dcat-ap1.1.git
+	url = https://github.com/sruest/dcat-ap1.1.git

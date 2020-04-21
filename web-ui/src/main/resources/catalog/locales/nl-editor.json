@@ -415,5 +415,10 @@
     "accessManagerChooseGroups": "Kies één of meerdere records",
     "accessManagerChooseOperations": "Kies één of meerdere operatie typen",
     "status-no-status": "Workflow niet actief",
-    "draft": "Werk kopie"
+    "draft": "Werk kopie",
+    "searchAlicence": "Selecteer een licentie ...",
+    "linkToDcatapsource": "Link naar brondataset",
+    "linkToDcatapsourceTitle": "Link een bron dataset met de huidige metadata",
+    "linkToDcataprelation": "Link naar gerelateerde dataset",
+    "linkToDcataprelationTitle": "Link een gerelateerde dataset met de huidige metadata"
 }

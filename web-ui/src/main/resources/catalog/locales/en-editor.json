@@ -415,5 +415,10 @@
     "accessManagerChooseGroups": "Choose one or more groups",
     "accessManagerChooseOperations": "Choose one or more operation types",
     "status-no-status": "Workflow not active",
-    "draft": "Working copy"
+    "draft": "Working copy",
+    "searchAlicence": "Select a license ...",
+    "linkToDcatapsource": "Link to a source dataset",
+    "linkToDcatapsourceTitle": "Link a source dataset to the current metadata",
+    "linkToDcataprelation": "Link to a related dataset",
+    "linkToDcataprelationTitle": "Link a related dataset to the current metadata"
 }

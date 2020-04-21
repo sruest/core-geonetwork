@@ -99,8 +99,12 @@
     This class could be used to customize style of first or following
     element of same kind. eg. do not display label. -->
     <xsl:param name="isFirst" required="no" as="xs:boolean" select="true()"/>
+    <xsl:param name="isForceLabel" required="no" as="xs:boolean" select="false()"/>
 
     <xsl:param name="isReadOnly" required="no" as="xs:boolean" select="false()"/>
+
+    <!-- Mandatory field inside optional fieldset. Black '*' instead of red -->
+    <xsl:param name="subRequired" required="no" as="xs:boolean" select="false()"/>
 
     <xsl:variable name="isMultilingual" select="count($value/values) > 0"/>
 
@@ -316,6 +320,7 @@
         <xsl:with-param name="childEditInfo" select="$parentEditInfo"/>
         <xsl:with-param name="parentEditInfo" select="../gn:element"/>
         <xsl:with-param name="isFirst" select="false()"/>
+        <xsl:with-param name="isForceLabel" select="$isForceLabel"/>
         <xsl:with-param name="isHidden" select="true()"/>
         <xsl:with-param name="name" select="name()"/>
       </xsl:call-template>
@@ -354,6 +359,9 @@
       <null/>
     </xsl:param>
     <xsl:param name="isDisabled" select="ancestor::node()[@xlink:href]"/>
+    <!-- Collapsed fieldsets reopens when saving, this param can be
+    used to collapse again the fieldset after loading -->
+    <xsl:param name="isSlideToggle" select="false()" required="no"/>
 
 
     <xsl:variable name="hasXlink" select="@xlink:href"/>
@@ -363,7 +371,7 @@
               class="{if ($hasXlink) then 'gn-has-xlink' else ''} gn-{substring-after(name(), ':')}">
 
       <legend class="{$cls}"
-              data-gn-slide-toggle=""
+              data-gn-slide-toggle="{$isSlideToggle}"
               data-gn-field-tooltip="{$schema}|{name()}|{name(..)}|">
         <!--
          The toggle title is in conflict with the element title
@@ -812,6 +820,7 @@
     <!-- Hide add element if child of an XLink section. -->
     <xsl:param name="isDisabled" select="ancestor::node()[@xlink:href]"/>
     <xsl:param name="isFirst" required="no" as="xs:boolean" select="true()"/>
+    <xsl:param name="isForceLabel" required="no" as="xs:boolean" select="false()"/>
     <xsl:param name="isHidden" required="no" as="xs:boolean" select="false()"/>
     <xsl:param name="name" required="no" as="xs:string" select="''"/>
     <xsl:param name="class" required="no" as="xs:string?" select="''"/>
@@ -835,7 +844,7 @@
         data-gn-field-highlight="">
         <label class="col-sm-2 control-label"
                data-gn-field-tooltip="{$schema}|{$qualifiedName}|{$parentName}|">
-          <xsl:if test="normalize-space($label) != ''">
+          <xsl:if test="normalize-space($label) != '' and normalize-space($btnLabel)=''">
             <xsl:value-of select="$label"/>
           </xsl:if>
           &#160;
