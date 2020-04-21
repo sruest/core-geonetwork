@@ -599,12 +599,15 @@ public class MetadataApiTest extends AbstractServiceIntegrationTest {
 
         // Request each type
         for (RelatedItemType type : RelatedItemType.values()) {
-            if (type == RelatedItemType.hassources ||
+            if (type == RelatedItemType.dcatapsources ||
+                type == RelatedItemType.dcataprelations ||
+                type == RelatedItemType.hassources ||
                 type == RelatedItemType.related ||
                 type == RelatedItemType.hasfeaturecats ||
                 type == RelatedItemType.brothersAndSisters ||
                 type == RelatedItemType.thumbnails) {
                 // TODO modify mef2-related.zip test metadata to contain a valid hassources value
+                // TODO modify mef2-related.zip test metadata to contain a valid dcatapsources & dcataprelations values
                 continue;
             }
             String uuidToTest = MAIN_UUID;
